@@ -11,7 +11,6 @@ use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
 
 #[AsController]
 class ViewController extends ActionController
@@ -20,17 +19,15 @@ class ViewController extends ActionController
     private ExtensionConfiguration $extensionConfiguration;
     private ModuleTemplateFactory $moduleTemplateFactory;
     private IconFactory $iconFactory;
-    protected UriBuilder $uriBuilder;
 
     public function __construct(
         ExtensionConfiguration $extensionConfiguration,
         ModuleTemplateFactory  $moduleTemplateFactory,
         IconFactory            $iconFactory,
-        UriBuilder             $uriBuilder
+
     )
     {
         $this->extensionConfiguration = $extensionConfiguration;
-        $this->uriBuilder = $uriBuilder;
         $this->iconFactory = $iconFactory;
         $this->moduleTemplateFactory = $moduleTemplateFactory;
     }
@@ -42,7 +39,7 @@ class ViewController extends ActionController
         $webPath = $this->extensionConfiguration
             ->get($this->extKey, 'webPath');
 
-        $moduleTemplate->assign('webPath', $webPath);
+        $this->view->assign('webPath', $webPath);
 
         // adding a page-shortcut button
         $routeIdentifier = 'system_webalizer'; // array-key of the module-configuration
@@ -53,6 +50,7 @@ class ViewController extends ActionController
         $shortcutButton->setArguments(['controller' => 'ViewController', 'action' => 'index']);
         $buttonBar->addButton($shortcutButton, ButtonBar::BUTTON_POSITION_RIGHT);
 
-        return $moduleTemplate->renderResponse('View/Index');
+        $moduleTemplate->setContent($this->view->render());
+        return $this->htmlResponse($moduleTemplate->renderContent());
     }
 }
