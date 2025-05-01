@@ -11,9 +11,9 @@ defined('TYPO3') or die();
 // Module System > Backend Users
 ExtensionUtility::registerModule(
     'Webalizer',
-    'system',
+    'web',
     'webalizer',
-    'top',
+    'bottom',
     [
         ViewController::class => 'index',
     ],

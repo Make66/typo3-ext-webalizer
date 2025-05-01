@@ -1,12 +1,12 @@
 <?php
 
 return [
-    'system_webalizer' => [
-        'parent' => 'system',
+    'web_webalizer' => [
+        'parent' => 'web',
         //'position' => ['after' => 'web_info'],
         //'access' => 'user',
         'workspaces' => 'live',
-        'path' => '/module/system/statistics',
+        'path' => '/module/web/statistics',
         'labels' => 'LLL:EXT:webalizer/Resources/Private/Language/Module/locallang_mod.xlf',
         'extensionName' => 'Statistics',
         'iconIdentifier' => 'tx_webalizer-backend-module',
