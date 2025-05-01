@@ -1,2 +1,3 @@
-# typo3-ext-webalizer
-Simple window for webalizer files on the server.
+# Simple window to existing webalizer files and a nice icon
+
+Simple window to existing webalizer files and a nice icon

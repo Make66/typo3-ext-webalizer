@@ -1,0 +1,32 @@
+{
+    "name": "taketool/webalizer",
+    "description": "Simple window to existing webalizer files and a nice icon",
+    "type": "typo3-cms-extension",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Martin Keller",
+            "email": "martin.keller@taketool.de"
+        }
+    ],
+    "require": {
+        "typo3/cms-core": "^11.5 || ^12.4 || ^13.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Taketool\\Webalizer\\": "Classes/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "typo3/class-alias-loader": true,
+            "typo3/cms-composer-installers": true
+        },
+        "sort-packages": true
+    },
+    "extra": {
+        "typo3/cms": {
+            "extension-key": "webalizer"
+        }
+    }
+}
