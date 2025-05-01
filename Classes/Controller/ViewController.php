@@ -23,8 +23,7 @@ class ViewController extends ActionController
     public function __construct(
         ExtensionConfiguration $extensionConfiguration,
         ModuleTemplateFactory  $moduleTemplateFactory,
-        IconFactory            $iconFactory,
-
+        IconFactory            $iconFactory
     )
     {
         $this->extensionConfiguration = $extensionConfiguration;
