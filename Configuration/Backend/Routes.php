@@ -3,8 +3,8 @@
 use Taketool\Webalizer\Controller\ViewController;
 
 return [
-    'system_webalizer' => [
-        'path' => '/module/system/webalizer',
+    'web_webalizer' => [
+        'path' => '/module/web/webalizer',
         'referrer' => 'required,refresh-always',
         'target' => Controller\ViewController::class . '::listAction',
     ],

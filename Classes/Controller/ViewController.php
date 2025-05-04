@@ -35,8 +35,12 @@ class ViewController extends ActionController
     {
         $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
 
-        $webPath = $this->extensionConfiguration
-            ->get($this->extKey, 'webPath');
+        $site = $this->request->getAttribute('site');
+        try {
+            $webPath = $site->getAttribute('webalizerShowPath');
+        } catch (\InvalidArgumentException $e) {
+            $webPath = 'https://www.taketool.de/';
+        }
 
         $this->view->assign('webPath', $webPath);
 
