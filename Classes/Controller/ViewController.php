@@ -35,14 +35,22 @@ class ViewController extends ActionController
     {
         $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
 
-        $site = $this->request->getAttribute('site');
-        try {
-            $webPath = $site->getAttribute('webalizerShowPath');
-        } catch (\InvalidArgumentException $e) {
-            $webPath = 'https://www.taketool.de/';
+        $webPath = '';
+        $site = $this->request->getAttribute('site') ?? [];
+        $isSiteSelected = (get_class($site) === 'TYPO3\CMS\Core\Site\Entity\Site');
+
+        if ($isSiteSelected) {
+            try {
+                $webPath = $site->getAttribute('webalizerShowPath');
+            } catch (\InvalidArgumentException $e) {
+                $webPath = 'https://www.taketool.de/';
+            }
         }
 
-        $this->view->assign('webPath', $webPath);
+        $this->view->assignMultiple([
+            'webPath' => $webPath,
+            'isSiteSelected' => $isSiteSelected,
+        ]);
 
         // adding a page-shortcut button
         $routeIdentifier = 'system_webalizer'; // array-key of the module-configuration

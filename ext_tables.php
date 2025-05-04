@@ -11,13 +11,13 @@ defined('TYPO3') or die();
 ExtensionUtility::registerModule(
     'Webalizer',
     'web',
-    'webalizer',
+    'tx_Webalizer',
     'bottom',
     [
         ViewController::class => 'index',
     ],
     [
-        'access' => 'user',
+        'access' => 'user,group',
         'iconIdentifier' => 'tx_webalizer-backend-module',
         'labels' => 'LLL:EXT:webalizer/Resources/Private/Language/Module/locallang_mod.xlf',
     ]

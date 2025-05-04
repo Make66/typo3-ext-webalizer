@@ -11,7 +11,17 @@
         pageTitle="Web Statistics"
         includeCssFiles="{0: '{f:uri.resource(path:\'Css/BeStyles.css\')}'}"
     />
-    <iframe src="{webPath}" style="width: 100%; height: 100%" />
+    <f:if condition="{isSiteSelected}">
+        <f:then>
+            <iframe src="{webPath}" style="width: 100%; height: 100%" />
+        </f:then>
+        <f:else>
+            <div style="padding: 20px;">
+                <h1>Web Statistics</h1>
+                <p>Please select a site to continue.</p>
+            </div>
+        </f:else>
+    </f:if>
 </f:section>
 
 </html>
