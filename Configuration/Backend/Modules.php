@@ -4,7 +4,7 @@ return [
     'web_webalizer' => [
         'parent' => 'web',
         //'position' => ['after' => 'web_info'],
-        'access' => 'user',
+        'access' => 'user,group',
         'workspaces' => 'live',
         'path' => '/module/web/statistics',
         'labels' => 'LLL:EXT:webalizer/Resources/Private/Language/Module/locallang_mod.xlf',
