@@ -10,6 +10,7 @@ use TYPO3\CMS\Backend\Template\Components\ButtonBar;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Imaging\IconFactory;
+use TYPO3\CMS\Core\Site\Entity\Site;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 #[AsController]
@@ -36,8 +37,8 @@ class ViewController extends ActionController
         $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
 
         $webPath = '';
-        $site = $this->request->getAttribute('site') ?? [];
-        $isSiteSelected = (get_class($site) === 'TYPO3\CMS\Core\Site\Entity\Site');
+        $site = $this->request->getAttribute('site');
+        $isSiteSelected = $site instanceof Site;
 
         if ($isSiteSelected) {
             try {
@@ -47,21 +48,20 @@ class ViewController extends ActionController
             }
         }
 
-        $this->view->assignMultiple([
+        $moduleTemplate->assignMultiple([
             'webPath' => $webPath,
             'isSiteSelected' => $isSiteSelected,
         ]);
 
         // adding a page-shortcut button
-        $routeIdentifier = 'system_webalizer'; // array-key of the module-configuration
+        $routeIdentifier = 'web_webalizer'; // array-key of the module-configuration
         $buttonBar = $moduleTemplate->getDocHeaderComponent()->getButtonBar();
         $shortcutButton = $buttonBar->makeShortcutButton()
-            ->setDisplayName('Shortcut to my action')
+            ->setDisplayName('Web Statistics')
             ->setRouteIdentifier($routeIdentifier);
         $shortcutButton->setArguments(['controller' => 'ViewController', 'action' => 'index']);
         $buttonBar->addButton($shortcutButton, ButtonBar::BUTTON_POSITION_RIGHT);
 
-        $moduleTemplate->setContent($this->view->render());
-        return $this->htmlResponse($moduleTemplate->renderContent());
+        return $moduleTemplate->renderResponse('View/Index');
     }
 }
